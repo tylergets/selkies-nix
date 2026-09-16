@@ -34,6 +34,7 @@ Outputs:
 | `selkies-web` | Built browser client and controller database |
 | `interposers` | Native gamepad and webcam preload libraries |
 | `stream` | Small launcher for streaming the current X11 desktop on localhost |
+| `stream-app` | Launch a nixpkgs application in a separate streamed Xvfb desktop |
 
 Linux x86_64 and ARM64 outputs are provided. The build and startup smoke test
 have been verified on **x86_64-linux**; ARM64 has been evaluation-checked only.
@@ -65,6 +66,50 @@ nix run .#stream -- --port=8081 --use-cpu=true --audio-enabled=false
 For a password-protected session, use the example below or pass
 `--enable-basic-auth=true` with your credentials in the corresponding environment
 variables.
+
+## Stream a single application in Xvfb
+
+This creates a new virtual desktop; it does not need an existing graphical session:
+
+```sh
+nix build .#stream-app
+./result/bin/stream-app xterm
+```
+
+Or run directly, choosing an app from this flake's **pinned nixpkgs**:
+
+```sh
+nix run .#stream-app -- xterm
+nix run .#stream-app -- --port 8081 --size 1920x1080 firefox --no-remote
+```
+
+Open **http://localhost:8080** (or the selected port). Launcher options go before
+the package attribute; everything after it is passed to the application. Both
+`xterm` and `nixpkgs#xterm` are accepted, and both use the pinned source rather
+than the machine's flake registry. Nested attributes such as
+`kdePackages.konsole` work too.
+
+The launcher builds the requested package, chooses its `meta.mainProgram`, and
+starts Xvfb on an automatically allocated display with Xauthority authentication.
+Openbox maximizes the app's windows, and a private D-Bus session keeps it separate
+from the host desktop. Closing the app, Ctrl+C, or SIGTERM stops the streaming
+server, window manager, D-Bus daemon, X server, and application process groups.
+Use application-specific options such as Firefox's `--no-remote` when an app
+would otherwise hand off to an already-running instance.
+
+Defaults are a **1280×720** desktop, localhost-only HTTP without a login, CPU
+video encoding, and disabled audio/microphone/webcam/gamepad forwarding. The app
+retains your home directory and filesystem access: this is display/session
+isolation, not an application security sandbox.
+
+For packages with multiple executables, select one explicitly, or use an
+already-built executable:
+
+```sh
+nix run .#stream-app -- --exe xterm xterm -T 'My streamed terminal'
+nix run .#stream-app -- --exec /absolute/path/to/application -- app-argument
+nix run .#stream-app -- --help
+```
 
 ## Run against an existing X11 desktop
 
@@ -160,6 +205,9 @@ Package builds check Python imports, including the native extensions. The
 flake's smoke check starts a virtual X11 display and the `stream` launcher,
 then verifies HTTP delivery of the dashboard, JavaScript bundles, and
 manifest. It does not require a GPU or a running desktop/audio session.
+The `stream-app` check also launches a real xterm in its private Xvfb session,
+verifies environment isolation and HTTP delivery, and checks process and socket
+cleanup on both SIGTERM and application exit.
 
 ## Related work
 

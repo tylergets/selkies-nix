@@ -84,6 +84,17 @@
                 python ${./tests/smoke.py} ${self.packages.${system}.stream}/bin/stream
                 touch "$out"
               '';
+          stream-app =
+            pkgs.runCommand "selkies-stream-app-test"
+              {
+                nativeBuildInputs = [ pkgs.python3 ];
+              }
+              ''
+                python ${./tests/stream_app.py} \
+                  ${self.packages.${system}.stream-app}/bin/stream-app \
+                  ${pkgs.xterm}/bin/xterm
+                touch "$out"
+              '';
         }
       );
     };

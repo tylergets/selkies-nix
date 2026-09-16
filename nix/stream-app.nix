@@ -1,8 +1,26 @@
-{ writeShellApplication, python3, nix, xorg-server, xauth, openbox, dbus, selkies,
-  nixpkgsSource, stdenv }:
+{
+  writeShellApplication,
+  python3,
+  nix,
+  xorg-server,
+  xauth,
+  openbox,
+  dbus,
+  selkies,
+  nixpkgsSource,
+  stdenv,
+}:
 writeShellApplication {
   name = "stream-app";
-  runtimeInputs = [ python3 nix xorg-server xauth openbox dbus selkies ];
+  runtimeInputs = [
+    python3
+    nix
+    xorg-server
+    xauth
+    openbox
+    dbus
+    selkies
+  ];
   runtimeEnv = {
     STREAM_APP_NIXPKGS = toString nixpkgsSource;
     STREAM_APP_SYSTEM = stdenv.hostPlatform.system;
