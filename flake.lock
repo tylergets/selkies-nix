@@ -1,0 +1,113 @@
+{
+  "nodes": {
+    "aitop": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774955656,
+        "narHash": "sha256-pNJLWkdUs8vxYVHZFSVZnMQaTn7/Mga/Cpr4FlFw9e8=",
+        "type": "tarball",
+        "url": "https://files.pythonhosted.org/packages/45/cf/f0e41130609d4bdef94852e60e4cccee6304e38edb44d71571f230b4c4fb/aitop-0.16.10.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://files.pythonhosted.org/packages/45/cf/f0e41130609d4bdef94852e60e4cccee6304e38edb44d71571f230b4c4fb/aitop-0.16.10.tar.gz"
+      }
+    },
+    "controller-db": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789116326,
+        "narHash": "sha256-jH7glM8qOrZ2rffzxclAorO+gnzvhQ0p+xPfgL7ZYHM=",
+        "owner": "mdqinc",
+        "repo": "SDL_GameControllerDB",
+        "rev": "5a12daa568d19344f9b6e9286ef5929833b25c7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mdqinc",
+        "repo": "SDL_GameControllerDB",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789426278,
+        "narHash": "sha256-GnotcvKtbTMnoVx6G4E7ZdUX6487Dky74dqq3pU7iRk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "efe6f071ede9d21c37462d2d6682d5e670099684",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pcmflux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789144626,
+        "narHash": "sha256-KhR9oRqVC5tN5FKp0p9DwcIyI/g4OL8Gpp8O+9si5zs=",
+        "owner": "selkies-project",
+        "repo": "pcmflux",
+        "rev": "00bd3bcc99fc0070feb0f5d89f01b5fa38639244",
+        "type": "github"
+      },
+      "original": {
+        "owner": "selkies-project",
+        "ref": "2.1.0rc0",
+        "repo": "pcmflux",
+        "type": "github"
+      }
+    },
+    "pixelflux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789144628,
+        "narHash": "sha256-3LR4UND22MxAmScurLbpYhjeirZx8XlSxiZZW/oa02E=",
+        "owner": "selkies-project",
+        "repo": "pixelflux",
+        "rev": "b7a30971f46e2e1562e3f415ff520a44867c71af",
+        "type": "github"
+      },
+      "original": {
+        "owner": "selkies-project",
+        "ref": "2.1.0rc0",
+        "repo": "pixelflux",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "aitop": "aitop",
+        "controller-db": "controller-db",
+        "nixpkgs": "nixpkgs",
+        "pcmflux": "pcmflux",
+        "pixelflux": "pixelflux",
+        "selkies": "selkies"
+      }
+    },
+    "selkies": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789204862,
+        "narHash": "sha256-BFdkgaczqK0d8hGr1kZandPQKmKAWwFzCwXXy4qf6AY=",
+        "owner": "selkies-project",
+        "repo": "selkies",
+        "rev": "f5eb10c8b1bdbb9c8e0d8ed3deb8387bc566630e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "selkies-project",
+        "ref": "2.0.0rc0",
+        "repo": "selkies",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
