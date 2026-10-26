@@ -83,7 +83,10 @@ buildPythonApplication rec {
     nvidia-ml-py
   ];
   makeWrapperArgs = [
-    "--prefix PATH : ${
+    "--prefix"
+    "PATH"
+    ":"
+    "${
       lib.makeBinPath [
         xrandr
         xset
@@ -93,7 +96,10 @@ buildPythonApplication rec {
         libpulseaudio
       ]
     }"
-    "--prefix LD_LIBRARY_PATH : ${
+    "--prefix"
+    "LD_LIBRARY_PATH"
+    ":"
+    "${
       lib.makeLibraryPath [
         libxkbcommon
         libglvnd
@@ -101,7 +107,9 @@ buildPythonApplication rec {
         vulkan-loader
       ]
     }"
-    "--set-default XKB_CONFIG_ROOT ${xkeyboard-config}/share/X11/xkb"
+    "--set-default"
+    "XKB_CONFIG_ROOT"
+    "${xkeyboard-config}/share/X11/xkb"
   ];
   pythonImportsCheck = [
     "selkies"
